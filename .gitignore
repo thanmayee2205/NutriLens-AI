@@ -1,0 +1,81 @@
+#################################################
+# Flutter
+#################################################
+
+frontend/.dart_tool/
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.packages
+frontend/build/
+frontend/.pub-cache/
+frontend/.pub/
+frontend/coverage/
+
+#################################################
+# Android
+#################################################
+
+frontend/android/.gradle/
+frontend/android/app/build/
+frontend/android/local.properties
+frontend/android/captures/
+
+#################################################
+# iOS
+#################################################
+
+frontend/ios/Pods/
+frontend/ios/.symlinks/
+frontend/ios/Flutter/
+frontend/ios/build/
+
+#################################################
+# Python
+#################################################
+
+backend/venv/
+backend/__pycache__/
+backend/**/*.pyc
+backend/.pytest_cache/
+backend/.mypy_cache/
+
+#################################################
+# Environment files
+#################################################
+
+.env
+.env.*
+*.env
+
+#################################################
+# VS Code
+#################################################
+
+.vscode/
+
+#################################################
+# IntelliJ / Android Studio
+#################################################
+
+.idea/
+*.iml
+
+#################################################
+# OS files
+#################################################
+
+Thumbs.db
+.DS_Store
+
+#################################################
+# Logs
+#################################################
+
+*.log
+
+#################################################
+# Temporary
+#################################################
+
+*.tmp
+*.temp

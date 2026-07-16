@@ -1,43 +1,117 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+
+import '../../core/data/app_data.dart';
+import '../../services/auth_service.dart';
+import '../../services/user_service.dart';
+import '../dashboard/dashboard_screen.dart';
 import '../onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() =>
+      _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState
+    extends State<SplashScreen> {
 
   @override
   void initState() {
     super.initState();
+    initializeApp();
+  }
 
-    Timer(
-  const Duration(seconds: 2),
-  () {
+  Future<void> initializeApp() async {
+
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
+
+    final loggedIn =
+        await AuthService.isLoggedIn();
+
+    if (loggedIn) {
+
+      final user =
+          await UserService.loadUser();
+
+      if (user != null) {
+
+        currentUser.fullName =
+            user["fullName"] ?? "";
+
+        currentUser.age =
+            user["age"] ?? 0;
+
+        currentUser.gender =
+            user["gender"] ?? "Female";
+
+        currentUser.height =
+            (user["height"] ?? 0)
+                .toDouble();
+
+        currentUser.weight =
+            (user["weight"] ?? 0)
+                .toDouble();
+
+        currentUser.activityLevel =
+            user["activityLevel"] ??
+                "Moderately Active";
+
+        currentUser.diabetes =
+            user["diabetes"] ?? false;
+
+        currentUser.hypertension =
+            user["hypertension"] ??
+                false;
+
+        currentUser.cholesterol =
+            user["cholesterol"] ??
+                false;
+
+        currentUser.allergies =
+            List<String>.from(
+          user["allergies"] ?? [],
+        );
+
+        currentUser.dietPreference =
+            user["dietPreference"] ??
+                "No Preference";
+      }
+
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) =>
+              const DashboardScreen(),
+        ),
+      );
+
+      return;
+    }
+        if (!mounted) return;
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const OnboardingScreen(),
+        builder: (_) =>
+            const OnboardingScreen(),
       ),
     );
-  },
-);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-
       body: const Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-
+          mainAxisAlignment:
+              MainAxisAlignment.center,
           children: [
 
             Icon(
